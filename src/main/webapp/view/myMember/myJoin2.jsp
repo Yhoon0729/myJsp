@@ -102,10 +102,23 @@ select {
 }
 </style>
 
+<script>
+function chkpwd(f) {
+	let chk = f.pwd.value==f.pwd2.value
+	if(!chk) {
+		alert("비밀번호 확인이 틀렸습니다.")
+		f.pwd2.focus()
+		return chk;
+	} else {
+		return chk;
+	}
+}
+</script>
+
 </head>
 <body>
 	<div id="container">
-		<form method="post" action="myJoinPro.jsp">
+		<form method="post" action="myJoinPro.jsp" onsubmit="return chkpwd(this)">
 			<header>
 				<h1>
 					<p>KIC 회원가입</p>
@@ -125,7 +138,7 @@ select {
 			<div class="userInput">
 				<h3 class="list">비밀번호 확인</h3>
 				<span class="box"><input type="password" maxlength="20"
-					required></span>
+					name="pwd2" required></span>
 			</div>
 			<div class="userInput">
 				<h3 class="list">

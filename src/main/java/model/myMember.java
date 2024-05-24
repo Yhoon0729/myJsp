@@ -1,4 +1,4 @@
-package myMember;
+package model;
 
 public class myMember {
 	private String id;

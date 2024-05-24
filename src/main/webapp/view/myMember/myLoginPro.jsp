@@ -1,6 +1,7 @@
 
-<%@page import="myMember.myMember"%>
-<%@page import="myMember.myMemberDAO"%>
+<%@page import="dao.myMemberDAO"%>
+<%@page import="model.myMember"%>
+
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.DriverManager"%>

@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
@@ -18,28 +18,27 @@
 <body>
 	<nav class="navbar navbar-expand-sm bg-light">
 		<ul class="navbar-nav">
-			<li class="nav-item"><a class="nav-link"
-				href="../myMember/myPage.jsp">홈페이지</a></li>
+			<li class="nav-item"><a class="nav-link" href="../myMember/myPage">홈페이지</a></li>
 
-			<%
-			if (session.getAttribute("id") == null) {
-			%>
-			<li class="nav-item"><a class="nav-link"
-				href="../myMember/myJoin.jsp">회원가입</a></li>
-			<li class="nav-item"><a class="nav-link"
-				href="../myMember/myLogin.jsp">로그인</a></li>
-			<%
-			} else {
-			%>
+			<c:if test="${sessionScope.id==null}">
+				<li class="nav-item"><a class="nav-link"
+					href="../myMember/myJoin">회원가입</a></li>
+				<li class="nav-item"><a class="nav-link" href="../myMember/myLogin">로그인</a></li>
+			</c:if>
 
-			<li class="nav-item"><a class="nav-link"
-				href="../myMember/myMemberInfo.jsp"> 회원정보[<%=session.getAttribute("id")%>]
-			</a></li>
-			<li class="nav-item"><a class="nav-link"
-				href="../myMember/myLogout.jsp">로그아웃</a></li>
-			<%
-			}
-			%>
+			<c:if test="${sessionScope.id!=null}">
+				<li class="nav-item"><a class="nav-link"
+					href="../myMember/myMemberInfo"> 회원정보[<%=session.getAttribute("id")%>]
+				</a></li>
+				<li class="nav-item"><a class="nav-link"
+					href="../myMember/myLogout">로그아웃</a></li>
+			</c:if>
+
+			<c:if test="${sessionScope.id eq 'admin'}">
+				<li class="nav-item"><a class="nav-link"
+					href="../myMember/myMemberList">회원리스트</a></li>
+			</c:if>
+
 			<li class="nav-item"><a class="nav-link" href="#">공지사항</a></li>
 		</ul>
 	</nav>

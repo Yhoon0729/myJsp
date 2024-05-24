@@ -1,5 +1,5 @@
-<%@page import="myMember.myMember"%>
-<%@page import="myMember.myMemberDAO"%>
+<%@page import="dao.myMemberDAO"%>
+<%@page import="model.myMember"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
