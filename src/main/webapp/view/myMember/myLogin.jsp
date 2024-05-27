@@ -55,7 +55,7 @@
 <body>
 	<div id="loginContainer">
 		<h2>회원 로그인</h2>
-		<form action="myLoginPro.jsp" method="post">
+		<form action="myLoginPro" method="post">
 			<input type="text" name="id" placeholder="아이디" required>
 			<input type="password" name="pwd" placeholder="비밀번호" required>
 			<input type="submit" value="로그인">

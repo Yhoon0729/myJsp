@@ -118,7 +118,7 @@ function chkpwd(f) {
 </head>
 <body>
 	<div id="container">
-		<form method="post" action="myJoinPro.jsp" onsubmit="return chkpwd(this)">
+		<form method="post" action="myJoinPro" onsubmit="return chkpwd(this)">
 			<header>
 				<h1>
 					<p>KIC 회원가입</p>
