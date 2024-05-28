@@ -53,10 +53,9 @@
 							class="btn btn-primary" 
 							href="${pageContext.request.contextPath}/myMember/myMemberDeleteForm">
 								회원탈퇴</a> <a class="btn btn-primary"
-							href="${pageContext.request.contextPath}/mYmember/mYmemberPassForm">
+							href="${pageContext.request.contextPath}/myMember/myMemberPwdForm">
 								비밀번호수정</a></td>
 					</tr>
-				</table>
 			</div>
 		</div>
 	</div>

@@ -42,7 +42,7 @@ body {
 			<div class="input-form col-md-12 mx-auto">
 				<h4 class="mb-3  center">비밀번호 수정</h4>
 				<form class="validation-form" novalidate method="post"
-					action="memberPassPro">
+					action="myMemberPwdPro">
 					<div class="row">
 						<div class="col-md-6 mb-3">
 							<label for="id">아이디</label> <input type="text"
@@ -54,16 +54,16 @@ body {
 					
 					<div class="row">
 						<div class="col-md-6 mb-3">
-							<label for="pass">원래 비밀번호</label> <input type="password"
-								class="form-control" id="pass" placeholder="" value=""
-								name="pass" required>
+							<label for="pwd">원래 비밀번호</label> <input type="password"
+								class="form-control" id="pwd" placeholder="" value=""
+								name="pwd" required>
 							<div class="invalid-feedback">원래 비밀번호을 입력해주세요.</div>
 						</div>
 
 						<div class="col-md-6 mb-3">
-							<label for="pass">변경할 비밀번호</label> <input type="password"
-								class="form-control" id="pass" placeholder="" value=""
-								name="modPass" required>
+							<label for="modPwd">변경할 비밀번호</label> <input type="password"
+								class="form-control" id="modPwd" placeholder="" value=""
+								name="modPwd" required>
 							<div class="invalid-feedback">수정할 비밀번호을 입력해주세요.</div>
 						</div>
 					</div>

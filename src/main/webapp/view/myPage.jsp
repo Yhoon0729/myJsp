@@ -20,18 +20,6 @@
 		text-align: center;
 	}
 	
-	nav {
-		text-align: center;
-		padding: 10px 0;
-		background-color: #555;
-	}
-	
-	nav a {
-		color: #fff;
-		text-decoration: none;
-		padding: 0 10px;
-	}
-	
 	section {
 		padding: 20px;
 		background-color: #fff;

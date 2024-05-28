@@ -7,9 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 import model.myBoard;
-import model.KicMember;
 
 public class myBoardDAO {
 	public Connection getConnection() {
@@ -35,11 +33,11 @@ public class myBoardDAO {
 	public int insertBoard(myBoard board) {
 		Connection conn = getConnection();
 		PreparedStatement pstmt = null;
-		String sql = "insert into kicboard values (kicboardseq.nextval,?,?,?,?,?,sysdate,0,?)";
+		String sql = "insert into myboard values (myboardseq.nextval,?,?,?,?,?,sysdate,0,?)";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, board.getName());
-			pstmt.setString(2, board.getPass());
+			pstmt.setString(2, board.getPwd());
 			pstmt.setString(3, board.getSubject());
 			pstmt.setString(4, board.getContent());
 			pstmt.setString(5, board.getFile1());
@@ -54,21 +52,25 @@ public class myBoardDAO {
 
 	}
 
-	public List<myBoard> boardList(String boardid) {
+	public List<myBoard> myBoardList(String boardid, int pageInt, int limit) {
 		Connection conn = getConnection();
 		System.out.println(boardid);
 		PreparedStatement pstmt = null;
-		String sql = "select * from kicboard where boardid=? order by num desc";
+		String sql = "	select *	"
+				+ "	from (select rownum rn, a.* from myboard a where boardid=? order by num desc)	"
+				+ "	where rn between ? and ?	";
 		List<myBoard> li = new ArrayList<>();
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, boardid);
+			pstmt.setInt(2, (pageInt-1)*limit+1);
+			pstmt.setInt(3, pageInt*limit);
 			ResultSet rs = pstmt.executeQuery();
 			
 			while (rs.next()) {
 				myBoard m = new myBoard();
 				m.setNum(rs.getInt("num"));
-				m.setPass(rs.getString("pass"));
+				m.setPwd(rs.getString("pwd"));
 				m.setName(rs.getString("name"));
 				m.setSubject(rs.getString("subject"));
 				m.setContent(rs.getString("content"));
@@ -90,7 +92,7 @@ public class myBoardDAO {
 		Connection conn = getConnection();
 		PreparedStatement pstmt=null;
 		String sql = 
-		"select nvl(count(*),0) from kicBoard where boardid = ?"; //1
+		"select nvl(count(*),0) from myBoard where boardid = ?"; //1
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, boardid);
@@ -108,7 +110,7 @@ public class myBoardDAO {
 		Connection conn = getConnection();
 		PreparedStatement pstmt=null;
 		String sql = 
-		"select * from kicBoard where num = ?";
+		"select * from myBoard where num = ?";
 		//4. mapping
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -119,7 +121,7 @@ public class myBoardDAO {
 				//id 있음
 				board.setNum(rs.getInt("num"));
 				board.setName(rs.getString("name"));
-				board.setPass(rs.getString("pass"));
+				board.setPwd(rs.getString("pwd"));
 				board.setSubject(rs.getString("subject"));
 				board.setContent(rs.getString("content"));
 				board.setFile1(rs.getString("file1"));
@@ -143,7 +145,7 @@ public class myBoardDAO {
 		Connection conn = getConnection();
 		PreparedStatement pstmt=null;
 		String sql = 
-		"update kicboard set readcnt = readcnt+1 "
+		"update myboard set readcnt = readcnt+1 "
 		+ " where num = ?";
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -161,7 +163,7 @@ public class myBoardDAO {
 		Connection conn = getConnection();
 		PreparedStatement pstmt=null;
 		String sql = 
-		"update kicboard set name=?, subject=?, content=?, file1=? "
+		"update myboard set name=?, subject=?, content=?, file1=? "
 		+ " where num = ?";
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -184,7 +186,7 @@ public class myBoardDAO {
 		Connection conn = getConnection();
 		PreparedStatement pstmt=null;
 		String sql = 
-		"delete from kicboard where num=? ";
+		"delete from myboard where num=? ";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, num);

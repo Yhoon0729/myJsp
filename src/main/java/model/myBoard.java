@@ -5,7 +5,7 @@ import java.util.Date;
 public class myBoard {
 	private int num;
 	private String name;
-	private String pass;
+	private String pwd;
 	private String subject;
 	private String content;
 	private String file1;
@@ -24,11 +24,11 @@ public class myBoard {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getPass() {
-		return pass;
+	public String getPwd() {
+		return pwd;
 	}
-	public void setPass(String pass) {
-		this.pass = pass;
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
 	}
 	public String getSubject() {
 		return subject;
@@ -68,7 +68,7 @@ public class myBoard {
 	}
 	@Override
 	public String toString() {
-		return "KicBoard [num=" + num + ", name=" + name + ", pass=" + pass + ", subject=" + subject + ", content="
+		return "myBoard [num=" + num + ", name=" + name + ", pwd=" + pwd + ", subject=" + subject + ", content="
 				+ content + ", file1=" + file1 + ", regdate=" + regdate + ", readcnt=" + readcnt + ", boardid="
 				+ boardid + "]";
 	}

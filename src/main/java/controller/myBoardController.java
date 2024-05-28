@@ -16,9 +16,9 @@ import dao.myMemberDAO;
 import kic.mskim.MskimRequestMapping;
 import kic.mskim.RequestMapping;
 import model.myBoard;
-import model.KicMember;
+import model.myMember;
 
-@WebServlet("/board/*")
+@WebServlet("/myBoard/*")
 public class myBoardController extends MskimRequestMapping {
 
 	HttpSession session;
@@ -30,21 +30,21 @@ public class myBoardController extends MskimRequestMapping {
 		super.service(request, response);
 	}
 
-	@RequestMapping("index")
-	public String index(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	@RequestMapping("myPage")
+	public String myPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		return "/view/index.jsp";
+		return "/view/myPage.jsp";
 	}
 
-	@RequestMapping("boardForm")
-	public String boardForm(HttpServletRequest request, HttpServletResponse response)
+	@RequestMapping("myBoardForm")
+	public String myBoardForm(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		return "/view/board/boardForm.jsp";
+		return "/view/myBoard/myBoardForm.jsp";
 	}
 
-	@RequestMapping("boardInfo")
-	public String boardInfo(HttpServletRequest request, HttpServletResponse response)
+	@RequestMapping("myBoardInfo")
+	public String myBoardInfo(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// http://localhost:8080/kicmodel2/board/boardInfo?num=10
 
@@ -55,11 +55,11 @@ public class myBoardController extends MskimRequestMapping {
 		myBoard board = dao.getBoard(num);
 
 		request.setAttribute("board", board);
-		return "/view/board/boardInfo.jsp";
+		return "/view/byBoard/myBoardInfo.jsp";
 	}
 
-	@RequestMapping("boardUpdateForm")
-	public String boardUpdateForm(HttpServletRequest request, HttpServletResponse response)
+	@RequestMapping("myBoardUpdateForm")
+	public String myBoardUpdateForm(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// http://localhost:8080/kicmodel2/board/boardInfo?num=10
 		int num = Integer.parseInt(request.getParameter("num"));
@@ -68,17 +68,17 @@ public class myBoardController extends MskimRequestMapping {
 		myBoard board = dao.getBoard(num);
 
 		request.setAttribute("board", board);
-		return "/view/board/boardUpdateForm.jsp";
+		return "/view/myBoard/myBoardUpdateForm.jsp";
 	}
 
-	@RequestMapping("boardUpdatePro")
-	public String boardUpdatePro(HttpServletRequest request, HttpServletResponse response)
+	@RequestMapping("myBoardUpdatePro")
+	public String myBoardUpdatePro(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// http://localhost:8080/kicmodel2/board/boardInfo?num=10
 		String path = request.getServletContext().getRealPath("/") + "img/board/";
 		MultipartRequest multi = new MultipartRequest(request, path, 10 * 1024 * 1024, "UTF-8");
 		int num = Integer.parseInt(multi.getParameter("num"));
-		String pass = multi.getParameter("pass");
+		String pwd = multi.getParameter("pwd");
 		System.out.println(num);
 		myBoardDAO dao = new myBoardDAO();
 		myBoard board = new myBoard();
@@ -92,14 +92,14 @@ public class myBoardController extends MskimRequestMapping {
 		else
 			board.setFile1(multi.getFilesystemName("file1"));
 		String msg = "수정 되지 않았습니다";
-		String url = "boardUpdateForm?num=" + num;
+		String url = "myBoardUpdateForm?num=" + num;
 		System.out.println(boarddb);
 		if (boarddb != null) {
-			if (pass.equals(boarddb.getPass())) {
+			if (pwd.equals(boarddb.getPwd())) {
 				int count = dao.boardUpdate(board);
 				if (count == 1) {
 					msg = "수정 되었습니다";
-					url = "boardInfo?num=" + num;
+					url = "myBoardInfo?num=" + num;
 				}
 			} else {
 				msg = "비밀번호 확인 하세요";
@@ -112,25 +112,25 @@ public class myBoardController extends MskimRequestMapping {
 		return "/view/alert.jsp";
 	}
 
-	@RequestMapping("boardPro")
-	public String boardPro(HttpServletRequest request, HttpServletResponse response)
+	@RequestMapping("myBoardPro")
+	public String myBoardPro(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String path = request.getServletContext().getRealPath("/") + "img/board/";
 
 		MultipartRequest multi = new MultipartRequest(request, path, 10 * 1024 * 1024, "UTF-8");
 		String boardid = (String) session.getAttribute("boardid");// 1
-		myBoard kicboard = new myBoard();
-		kicboard.setName(multi.getParameter("name"));
-		kicboard.setPass(multi.getParameter("pass"));
-		kicboard.setSubject(multi.getParameter("subject"));
-		kicboard.setContent(multi.getParameter("content"));
-		kicboard.setFile1(multi.getFilesystemName("file1"));
-		kicboard.setBoardid(boardid); // 2
-		System.out.println(kicboard);
+		myBoard myBoard = new myBoard();
+		myBoard.setName(multi.getParameter("name"));
+		myBoard.setPwd(multi.getParameter("pwd"));
+		myBoard.setSubject(multi.getParameter("subject"));
+		myBoard.setContent(multi.getParameter("content"));
+		myBoard.setFile1(multi.getFilesystemName("file1"));
+		myBoard.setBoardid(boardid); // 2
+		System.out.println(myBoard);
 		myBoardDAO dao = new myBoardDAO();
-		int num = dao.insertBoard(kicboard);
+		int num = dao.insertBoard(myBoard);
 		String msg = "게시물 등록 성공";
-		String url = "boardList?boardid=" + boardid;
+		String url = "myBoardList?boardid=" + boardid;
 		if (num == 0) {
 			msg = "게시물 등록 실패";
 		}
@@ -139,12 +139,23 @@ public class myBoardController extends MskimRequestMapping {
 		return "/view/alert.jsp";
 	}
 
-	@RequestMapping("boardList")
-	public String boardList(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	@RequestMapping("myBoardList")
+	public String myBoardList(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+		
 		myBoardDAO dao = new myBoardDAO();
 		String boardid = request.getParameter("boardid");
 		session.setAttribute("boardid", boardid);
+		
+		if(session.getAttribute("boardid")==null) {
+			boardid="1";
+		}
+		
+		String pageNum = request.getParameter("pageNum");
+		session.setAttribute("pageNum", pageNum);
+		if(session.getAttribute("pageNum")==null) {
+			pageNum="1";
+		}
+		
 		String boardName = "";
 		switch (boardid) {
 		case "1":
@@ -160,39 +171,59 @@ public class myBoardController extends MskimRequestMapping {
 			boardName = "공지사항";
 		}
 		int count = dao.boardCount(boardid);
-		List<myBoard> li = dao.boardList(boardid);
+		int limit = 3;
+		int pageInt = Integer.parseInt(pageNum); // 페이지 목록 번호
+		int boardNum = count - ((pageInt-1)*limit); // 각 페이지의 첫번째 게시글
+		
+		int bottomLine = 3; // 하단 페이지 목록 갯수
+		int start = (pageInt - 1) / bottomLine * bottomLine + 1; // 하단 페이지 목록에서 start 페이지 번호
+		int end = start + limit - 1; // 하단 페이지 목록 마지막 페이지 번호
+		int maxPage = (int)Math.ceil((double)count/(double)limit); // 페이지 목록 갯수
+		if(end>maxPage) {
+			end = maxPage;
+		}
+		
+		List<myBoard> li = dao.myBoardList(boardid, pageInt, limit);
+		
+		request.setAttribute("bottomLine", bottomLine);
+		request.setAttribute("start", start);
+		request.setAttribute("end", end);
+		request.setAttribute("maxPage", maxPage);
+		request.setAttribute("pageInt", pageInt);
+		request.setAttribute("boardNum", boardNum);
+		
 		request.setAttribute("boardName", boardName);
 		request.setAttribute("li", li);
 		request.setAttribute("boardid", boardid);
 		request.setAttribute("nav", boardid);
 		request.setAttribute("count", count);
 
-		return "/view/board/boardList.jsp";
+		return "/view/myBoard/myBoardList.jsp";
 	}
 
-	@RequestMapping("boardDeleteForm")
-	public String boardDeleteForm(HttpServletRequest request, HttpServletResponse response)
+	@RequestMapping("myBoardDeleteForm")
+	public String myBoardDeleteForm(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setAttribute("num", request.getParameter("num"));
-		return "/view/board/boardDeleteForm.jsp";
+		return "/view/myBoard/myBoardDeleteForm.jsp";
 	}
 
-	@RequestMapping("boardDeletePro")
-	public String boardDeletePro(HttpServletRequest request, HttpServletResponse response)
+	@RequestMapping("myBoardDeletePro")
+	public String myBoardDeletePro(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		int num = Integer.parseInt(request.getParameter("num"));
-		String pass = request.getParameter("pass");
+		String pwd = request.getParameter("pwd");
 		String boardid = (String) session.getAttribute("boardid"); // 1
 		myBoardDAO dao = new myBoardDAO();
 		myBoard boarddb = dao.getBoard(num);
 		String msg = "삭제 되지 않았습니다";
-		String url = "boardDeleteForm?num=" + num;
+		String url = "myBoardDeleteForm?num=" + num;
 		if (boarddb != null) {
-			if (pass.equals(boarddb.getPass())) {
+			if (pwd.equals(boarddb.getPwd())) {
 				int count = dao.boardDelete(num);
 				if (count == 1) {
 					msg = "삭제 되었습니다";
-					url = "boardList?boardid=" + boardid;// 2
+					url = "myBoardList?boardid=" + boardid;// 2
 				}
 			} else {
 				msg = "비밀번호 확인 하세요";

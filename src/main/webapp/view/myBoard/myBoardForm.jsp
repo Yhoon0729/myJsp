@@ -53,8 +53,8 @@ function chkpass(f) {
 		<div class="input-form-backgroud row">
 			<div class="input-form col-md-12 mx-auto">
 				<h4 class="mb-3">게시판등록</h4>
-				<form class="validation-form" novalidate   enctype="multipart/form-data"
-				    action="boardPro"   method="post"    onsubmit="return chkpass(this)">
+				<form class="validation-form" enctype="multipart/form-data"
+				    action="myBoardPro"  method="post"    onsubmit="return chkpass(this)">
 					<div class="row">
 					  
 						
@@ -68,8 +68,8 @@ function chkpass(f) {
 					
 						<div class="row">
 						<div class="col-md-6 mb-3">
-							<label for="pass">비밀번호</label> <input type="password"    name="pass"
-								class="form-control" id="pass" placeholder="비밀번호" value="" required >
+							<label for="pwd">비밀번호</label> <input type="password"    name="pwd"
+								class="form-control" id="pwd" placeholder="비밀번호" value="" required >
 							<div class="invalid-feedback">비밀번호을 입력해주세요.</div>
 						</div>
 						<div class="col-md-6 mb-3">

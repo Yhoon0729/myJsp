@@ -29,13 +29,13 @@
 				<td colspan="2" >
 				<a class="btn btn-primary"
 				href=
-	"${pageContext.request.contextPath}/board/boardUpdateForm?num=${board.num}">
+	"${pageContext.request.contextPath}/myBoard/myBoardUpdateForm?num=${board.num}">
 				글수정</a>
 				<a class="btn btn-primary"
-	href="${pageContext.request.contextPath}/board/boardDeleteForm?num=${board.num}">
+	href="${pageContext.request.contextPath}/myBoard/myBoardDeleteForm?num=${board.num}">
 	글삭제</a>
 				<a class="btn btn-primary"
-	href="${pageContext.request.contextPath}/board/boardList?boardid=${sessionScope.boardid}">
+	href="${pageContext.request.contextPath}/myBoard/myBoardList?boardid=${sessionScope.boardid}">
 	글목록</a>
 				</td>
 			</tr>

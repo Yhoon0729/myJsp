@@ -37,10 +37,10 @@ body {
 </style>
 <script>
 function chkpass(f) {
-	let chk = f.pass.value==f.pass2.value
+	let chk = f.pwd.value==f.pwd2.value
 	if (!chk) {
 		alert("비밀번호 확인이 틀렸습니다")
-		f.pass2.focus()
+		f.pwd2.focus()
 		return false
 	}
 	return true
@@ -54,7 +54,7 @@ function chkpass(f) {
 			<div class="input-form col-md-12 mx-auto">
 				<h4 class="mb-3  text-center">게시판수정</h4>
 				<form class="validation-form" novalidate  enctype="multipart/form-data"
-				    action="boardUpdatePro"   method="post"    onsubmit="return chkpass(this)">
+				    action="myBoardUpdatePro"   method="post"    onsubmit="return chkpass(this)">
 					<input type="hidden"  name="num"  value="${board.num }"/>
 					<input type="hidden"  name="originfile"  value="${board.file1 }"/>
 					<div class="row">
@@ -70,8 +70,8 @@ function chkpass(f) {
 					
 						<div class="row">
 						<div class="col-md-6 mb-3">
-							<label for="pass">비밀번호</label> <input type="password"    name="pass"
-								class="form-control" id="pass" placeholder="비밀번호" value="" required >
+							<label for="pwd">비밀번호</label> <input type="password"    name="pwd"
+								class="form-control" id="pwd" placeholder="비밀번호" value="" required >
 							<div class="invalid-feedback">비밀번호을 입력해주세요.</div>
 						</div>
 						

@@ -202,15 +202,15 @@ public class myMemberController extends MskimRequestMapping {
 		return "/view/alert.jsp";
 	} // end of myMemberDeletePro()
 
-	@RequestMapping("myMemberPassForm")
-	public String myMemberPassForm(HttpServletRequest request, HttpServletResponse response)
+	@RequestMapping("myMemberPwdForm")
+	public String myMemberPwdForm(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		return "/view/myMember/myMemberPassForm.jsp";
-	} // end of myMemberPassForm()
+		return "/view/myMember/myMemberPwdForm.jsp";
+	} // end of myMemberPwdForm()
 
-	@RequestMapping("myMemberPassPro")
-	public String myMemberPassPro(HttpServletRequest request, HttpServletResponse response)
+	@RequestMapping("myMemberPwdPro")
+	public String myMemberPwdPro(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 
@@ -222,7 +222,7 @@ public class myMemberController extends MskimRequestMapping {
 		myMember memdb = dao.getMember(id);
 
 		String msg = "";
-		String url = "myMemberPassForm";
+		String url = "myMemberPwdForm";
 
 		if (memdb != null) {
 			if (memdb.getPwd().equals(pwd)) {
@@ -232,7 +232,7 @@ public class myMemberController extends MskimRequestMapping {
 				url = "myLogin";
 			} else {
 				msg = "비밀번호가 틀렸습니다.";
-				url = "myMemberPassForm";
+				url = "myMemberPwdForm";
 			} // end of if (memdb.getPwd().equals(pwd))
 		} else {
 			msg = "수정할 수 없습니다.";
@@ -242,7 +242,7 @@ public class myMemberController extends MskimRequestMapping {
 		request.setAttribute("url", url);
 
 		return "/view/alert.jsp";
-	} // end of myMemberPassPro()
+	} // end of myMemberPwdPro()
 
 	@RequestMapping("myLogin")
 	public String myLogin(HttpServletRequest request, HttpServletResponse response)

@@ -41,7 +41,7 @@ body {
 		<div class="input-form-backgroud row">
 			<div class="input-form col-md-12 mx-auto">
 				<h4 class="mb-3  center">회원탈퇴</h4>
-				<form class="validation-form" method="post" novalidate action="memberDeletePro">
+				<form class="validation-form" method="post" action="myMemberDeletePro">
 					<div class="row">
 						<div class="col-md-6 mb-3">
 							<label for="id">아이디</label> <input type="text"
@@ -50,9 +50,9 @@ body {
 							<div class="invalid-feedback">아이디를 입력해주세요.</div>
 						</div>
 						<div class="col-md-6 mb-3">
-							<label for="pass">비밀번호</label> <input type="password"
-								class="form-control" id="pass" placeholder="" value=""
-								name="pass" required>
+							<label for="pwd">비밀번호</label> <input type="password"
+								class="form-control" id="pwd" placeholder="" value=""
+								name="pwd" required>
 							<div class="invalid-feedback">비밀번호을 입력해주세요.</div>
 						</div>
 					</div>

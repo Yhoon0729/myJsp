@@ -44,14 +44,14 @@ body {
 			<div class="input-form col-md-12 mx-auto">
 				<h4 class="mb-3  center">게시물 삭제</h4>
 				<form class="validation-form" novalidate      
-				action="boardDeletePro"     method="post">
+				action="myBoardDeletePro"     method="post">
 				<input type="hidden"  name="num"    value="${num }"/>
 					<div class="row">
 						
 						<div class="col-md-6 mb-3">
-							<label for="pass">비밀번호</label> <input type="password"
-								class="form-control" id="pass" placeholder="" value=""   
-								name="pass" 
+							<label for="pwd">비밀번호</label> <input type="password"
+								class="form-control" id="pwd" placeholder="" value=""   
+								name="pwd" 
 								required>
 							<div class="invalid-feedback">비밀번호을 입력해주세요.</div>
 						</div>
